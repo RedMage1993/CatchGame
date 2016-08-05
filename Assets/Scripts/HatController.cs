@@ -12,7 +12,7 @@ public class HatController : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
 	}
 	
-	// Update is not called once per frame
+	// FixedUpdate is not called once per frame
     // Called once per physics timestep (can be set in settings)
 	void FixedUpdate () {
         Vector3 rawPosition = cam.ScreenToWorldPoint(Input.mousePosition); // Of mouse
