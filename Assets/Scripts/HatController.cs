@@ -5,15 +5,18 @@ public class HatController : MonoBehaviour {
 
     public Camera cam;
     private Rigidbody2D rb2d;
+    private Renderer rend;
 
-    private Vector3 limits; // Game screen top and right boundaries
+    private Vector3 limits; // Hat's movement boundaries
 
 	// Use this for initialization
 	void Start () {
         // Direct rigidbody2d usage deprecated
         rb2d = GetComponent<Rigidbody2D>();
+        rend = GetComponent<Renderer>(); // Have to do this to get bounds property
 
-        limits = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0.0f));
+        limits = cam.ScreenToWorldPoint(new Vector3(Screen.width, 0.0f, 0.0f));
+        limits.x -= rend.bounds.extents.x; // Subtract half of hat width (extents is half of box)
 	}
 	
 	// FixedUpdate is not called once per frame
