@@ -5,6 +5,7 @@ public class GameController : MonoBehaviour {
     public Camera cam;
     private Renderer rend;
     public GameObject ball;
+    public float timeLeft;
 
     private Vector3 limits; // Hat's movement boundaries
 
@@ -20,12 +21,19 @@ public class GameController : MonoBehaviour {
         StartCoroutine(Spawn());
     }
 
+    void FixedUpdate()
+    {
+        // Useful for those as it's smart and returns fixed delta time.
+        // Better than using coroutine (inconsistent) or Update (too fast; many DEC's).
+        timeLeft -= Time.deltaTime;
+    }
+
     IEnumerator Spawn()
     {
         // Give player moment to prepare
         yield return new WaitForSeconds(2.0f);
 
-        while (true)
+        while (timeLeft > 0)
         {
             Vector3 spawnPos = new Vector3(
                 Random.Range(-limits.x, limits.x),
