@@ -9,7 +9,8 @@ public class HatController : MonoBehaviour {
     private Vector3 limits; // Hat's movement boundaries
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         // Direct rigidbody2d usage deprecated
         rb2d = GetComponent<Rigidbody2D>();
         rend = GetComponent<Renderer>(); // Have to do this to get bounds property
@@ -20,7 +21,8 @@ public class HatController : MonoBehaviour {
 
     // FixedUpdate is not called once per frame
     // Called once per physics timestep (can be set in settings)
-    void FixedUpdate () {
+    void FixedUpdate ()
+    {
         // Issue where clamping doesn't working on Maximize on Play
         Vector3 worldPos = cam.ScreenToWorldPoint(Input.mousePosition); // Of mouse
         worldPos.x = Mathf.Clamp(worldPos.x, -limits.x, limits.x);
