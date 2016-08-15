@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/**
+ * TODO: 
+ * Come up with better way to time or count balls/chances left. I think it could be better. Right now, there's
+ * not really a sure way to say that every player of the game has an equal chance at getting a certain score.
+ * 
+ * We can create a public var for number of balls/chances. Use the spawn delay to calculate the max amount of time
+ * required for it (later will have to take bombs into account). If the time is less than the timeLeft var, then
+ * decide which to use over the other.
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class GameController : MonoBehaviour {
