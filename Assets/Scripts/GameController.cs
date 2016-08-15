@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour {
     public float timeLeft;
 
     private Vector3 limits; // Hat's movement boundaries
+    private bool started;
+    private float initTime;
 
     // Use this for initialization
     void Start()
@@ -18,6 +20,9 @@ public class GameController : MonoBehaviour {
         limits = cam.ScreenToWorldPoint(new Vector3(Screen.width, 0.0f, 0.0f));
         limits.x -= rend.bounds.extents.x; // Subtract half of ball width (extents is half of box)
 
+        started = false;
+        initTime = 0.0f;
+
         StartCoroutine(Spawn());
     }
 
@@ -25,13 +30,19 @@ public class GameController : MonoBehaviour {
     {
         // Useful for those as it's smart and returns fixed delta time.
         // Better than using coroutine (inconsistent) or Update (too fast; many DEC's).
-        timeLeft -= Time.deltaTime;
+        if (started && timeLeft > 0) // Only count down when game is actually running
+        {
+            timeLeft -= Time.deltaTime;
+        }
     }
 
     IEnumerator Spawn()
     {
         // Give player moment to prepare
         yield return new WaitForSeconds(2.0f);
+
+        initTime = timeLeft;
+        started = true;
 
         while (timeLeft > 0)
         {
@@ -48,5 +59,9 @@ public class GameController : MonoBehaviour {
 
             yield return new WaitForSeconds(Random.Range(1.0f, 2.0f));
         }
+
+        // This is just for consistency
+        started = false;
+        timeLeft = initTime;
     }
 }
