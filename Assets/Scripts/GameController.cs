@@ -6,6 +6,8 @@
  * We can create a public var for number of balls/chances. Use the spawn delay to calculate the max amount of time
  * required for it (later will have to take bombs into account). If the time is less than the timeLeft var, then
  * decide which to use over the other.
+ * 
+ * Look into OnValidate and building a custom inspector to update public variables as changed by developer.
  */
 
 using UnityEngine;
