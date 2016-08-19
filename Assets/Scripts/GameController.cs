@@ -18,7 +18,6 @@ public class GameController : MonoBehaviour {
     private Renderer rend;
     public GameObject ball;
     public float timeLeft;
-    public int spawnsLeft;
 
     private Vector3 limits; // Hat's movement boundaries
     private bool started;
