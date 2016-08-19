@@ -6,10 +6,12 @@ public class GameController : MonoBehaviour {
     private Renderer rend;
     public GameObject ball;
     public float timeLeft;
+    public int spawnsLeft;
 
     private Vector3 limits; // Hat's movement boundaries
     private bool started;
     private float initTime;
+    private int initSpawns;
 
     // Use this for initialization
     void Start()
@@ -22,6 +24,7 @@ public class GameController : MonoBehaviour {
 
         started = false;
         initTime = 0.0f;
+        initSpawns = 0;
 
         StartCoroutine(Spawn());
     }
@@ -38,14 +41,14 @@ public class GameController : MonoBehaviour {
 
     IEnumerator Spawn()
     {
-        // Give player moment to prepare
-        yield return new WaitForSeconds(2.0f);
-
         initTime = timeLeft;
+        initSpawns = spawnsLeft;
         started = true;
 
-        while (timeLeft > 0)
+        while (spawnsLeft > 0)
         {
+            yield return new WaitForSeconds(Random.Range(1.0f, (timeLeft / spawnsLeft) + 0.1f));
+
             Vector3 spawnPos = new Vector3(
                 Random.Range(-limits.x, limits.x),
                 transform.position.y,
@@ -57,11 +60,15 @@ public class GameController : MonoBehaviour {
 
             Instantiate(ball, spawnPos, spawnRot);
 
-            yield return new WaitForSeconds(Random.Range(1.0f, 2.0f));
+            spawnsLeft--;
         }
 
         // This is just for consistency
+        while (timeLeft > 0)
+            yield return new WaitForSeconds(timeLeft);
+
         started = false;
         timeLeft = initTime;
+        spawnsLeft = initSpawns;
     }
 }
