@@ -1,4 +1,12 @@
-﻿using UnityEngine;
+﻿/**
+ * Thinking of making an array with intervals that will be used with WaitForSeconds.
+ * It's a sort of random without being random. All of those intervals just need to add up to timeLeft.
+ *
+ * Let's also flip the hat upside down and then use the spacebar to jump up. The hat needs to collide
+ * with the bowling ball at the top of the jump. AKA The timing just needs to be good.
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class GameController : MonoBehaviour {
