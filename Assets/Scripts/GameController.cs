@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameController : MonoBehaviour {
@@ -6,6 +7,7 @@ public class GameController : MonoBehaviour {
     private Renderer rend;
     public GameObject ball;
     public float timeLeft;
+    public Text timerText;
 
     private Vector3 limits; // Hat's movement boundaries
     private bool started;
@@ -23,6 +25,7 @@ public class GameController : MonoBehaviour {
         started = false;
         initTime = 0.0f;
 
+        UpdateTimerText();
         StartCoroutine(Spawn());
     }
 
@@ -33,6 +36,7 @@ public class GameController : MonoBehaviour {
         if (started && timeLeft > 0) // Only count down when game is actually running
         {
             timeLeft -= Time.deltaTime;
+            UpdateTimerText();
         }
     }
 
@@ -63,5 +67,10 @@ public class GameController : MonoBehaviour {
         // This is just for consistency
         started = false;
         timeLeft = initTime;
+    }
+
+    void UpdateTimerText()
+    {
+        timerText.text = "Time Left:\n" + Mathf.RoundToInt(timeLeft);
     }
 }
