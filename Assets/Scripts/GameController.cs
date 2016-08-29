@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour {
     public Text timerText;
     public GameObject gameOverText;
     public GameObject restartButton;
+    public GameObject splashScreen;
+    public GameObject startButton;
 
     private Vector3 limits; // Hat's movement boundaries
     private bool started;
@@ -27,8 +29,7 @@ public class GameController : MonoBehaviour {
         started = false;
         initTime = 0.0f;
 
-        UpdateTimerText();
-        StartCoroutine(Spawn());
+		UpdateTimerText();
     }
 
     void FixedUpdate()
@@ -40,6 +41,14 @@ public class GameController : MonoBehaviour {
             timeLeft -= Time.deltaTime;
             UpdateTimerText();
         }
+    }
+
+    public void StartGame()
+    {
+        splashScreen.SetActive(false);
+        startButton.SetActive(false);
+
+        StartCoroutine(Spawn());
     }
 
     IEnumerator Spawn()
