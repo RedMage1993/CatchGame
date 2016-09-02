@@ -49,6 +49,7 @@ public class GameController : MonoBehaviour {
         splashScreen.SetActive(false);
         startButton.SetActive(false);
 
+        hc.ToggleControl(true);
         StartCoroutine(Spawn());
     }
 
@@ -59,7 +60,6 @@ public class GameController : MonoBehaviour {
 
         initTime = timeLeft;
         started = true;
-        hc.ToggleControl(true);
 
         while (timeLeft > 0)
         {
@@ -79,12 +79,12 @@ public class GameController : MonoBehaviour {
 
         yield return new WaitForSeconds(2.0f);
         gameOverText.SetActive(true);
+        hc.ToggleControl(false);
         yield return new WaitForSeconds(2.0f);
         restartButton.SetActive(true);
 
         // This is just for consistency
         started = false;
-        hc.ToggleControl(false);
         timeLeft = initTime;
     }
 
