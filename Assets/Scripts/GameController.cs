@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour {
     private Vector3 limits; // Hat's movement boundaries
     private bool started;
     private float initTime;
+    public HatController hc;
 
     // Use this for initialization
     void Start()
@@ -58,6 +59,7 @@ public class GameController : MonoBehaviour {
 
         initTime = timeLeft;
         started = true;
+        hc.ToggleControl(true);
 
         while (timeLeft > 0)
         {
@@ -82,6 +84,7 @@ public class GameController : MonoBehaviour {
 
         // This is just for consistency
         started = false;
+        hc.ToggleControl(false);
         timeLeft = initTime;
     }
 
