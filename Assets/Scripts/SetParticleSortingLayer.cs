@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HT_SetParticleSortingLayer : MonoBehaviour
+public class SetParticleSortingLayer : MonoBehaviour
 {
 	public string sortingLayerName;		// The name of the sorting layer the particles should be set to.
 	public int sortingOrder;
