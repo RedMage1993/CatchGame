@@ -15,10 +15,19 @@ public class Score : MonoBehaviour {
         UpdateScoreText();
 	}
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D()
     {
         score += ballValue;
         UpdateScoreText();
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bomb")
+        {
+            score -= ballValue * 2;
+            UpdateScoreText();
+        }
     }
 
     void UpdateScoreText()
